@@ -7,6 +7,11 @@ const schema = new mongoose.Schema({
   password: { type: String, required: true }
 });
 
+schema.methods.validatePassword = function (incomingPassword) {
+  const user = this; // for clarity
+  return incomingPassword === user.password;
+};
+
 schema.set('toJSON', {
   virtuals: true,
   transform: (doc, result) => {
