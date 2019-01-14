@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+const bcrypt = require('bcryptjs');
 
 const schema = new mongoose.Schema({
   fullname: String,
@@ -10,6 +10,15 @@ const schema = new mongoose.Schema({
 schema.methods.validatePassword = function (incomingPassword) {
   const user = this; // for clarity
   return incomingPassword === user.password;
+};
+
+schema.methods.validatePassword = function (incomingPassword) {
+  return bcrypt.compare(incomingPassword, this.password);
+};
+
+schema.statics.hashPassword = function (incomingPassword) {
+  const digest = bcrypt.hash(incomingPassword, 10);
+  return digest;
 };
 
 schema.set('toJSON', {
