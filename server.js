@@ -31,6 +31,7 @@ app.use(express.json());
 
 // Configure Passport to utilize local strategy;
 passport.use('local', localStrategy);
+passport.use(jwtStrategy);
 
 // Mount routers
 app.use('/api/notes', notesRouter);
