@@ -3,7 +3,8 @@
 const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-  name: { type: String, required: true }
+  name: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
 });
 
 schema.index({ name: 1, userId: 1 }, { unique: true });
