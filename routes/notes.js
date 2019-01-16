@@ -95,6 +95,10 @@ router.post('/', (req, res, next) => {
     }
   }
 
+  // if (mongoose.Types.ObjectId.isValid(folderId)) {
+
+  // }
+
   const newNote = { title, content, folderId, tags, userId };
   if (newNote.folderId === '') {
     delete newNote.folderId;
