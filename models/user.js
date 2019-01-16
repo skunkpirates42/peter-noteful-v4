@@ -8,11 +8,6 @@ const schema = new mongoose.Schema({
 });
 
 schema.methods.validatePassword = function (incomingPassword) {
-  const user = this; // for clarity
-  return incomingPassword === user.password;
-};
-
-schema.methods.validatePassword = function (incomingPassword) {
   return bcrypt.compare(incomingPassword, this.password);
 };
 
