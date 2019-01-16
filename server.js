@@ -29,14 +29,17 @@ app.use(express.static('public'));
 // Parse request body
 app.use(express.json());
 
-// Configure Passport to utilize local strategy;
+// Configure Passport to utilize given strategy;
 passport.use('local', localStrategy);
 passport.use(jwtStrategy);
 
+// Protect endpoints using JWT strategy
+const jwtAuth = passport.authenticate('jwt', { session: false, failWithError: true });
+
 // Mount routers
-app.use('/api/notes', notesRouter);
-app.use('/api/folders', foldersRouter);
-app.use('/api/tags', tagsRouter);
+app.use('/api/notes', jwtAuth, notesRouter);
+app.use('/api/folders', jwtAuth, foldersRouter);
+app.use('/api/tags', jwtAuth, tagsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api', authRouter);
 
