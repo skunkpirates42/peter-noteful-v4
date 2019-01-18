@@ -76,7 +76,7 @@ router.post('/', (req, res, next) => {
 /* ========== PUT/UPDATE A SINGLE ITEM ========== */
 router.put('/:id', (req, res, next) => {
   const { id } = req.params;
-  const userId = req.params.id;
+  const userId = req.user.id;
   const { name } = req.body;
 
   /***** Never trust users - validate input *****/
