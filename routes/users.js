@@ -24,12 +24,12 @@ router.post('/', (req, res, next) => {
   );
 
   if (nonStringField) {
-    const err = new Error('Incorrect field trype: expexted string');
+    const err = new Error('Incorrect field type: expected string');
     err.status = 422;
     return next(err);
   }
 
-  const explicitlyTrimmedFields = ['username', 'password'];
+  const explicitlyTrimmedFields = ['username', 'password', 'fullname'];
   const nonTrimmedField = explicitlyTrimmedFields.find(
     field => req.body[field].trim() !== req.body[field]
   );
@@ -84,8 +84,9 @@ router.post('/', (req, res, next) => {
     })
     .catch(err => {
       if (err.code === 11000) {
-        const err = new Error('The username already exists');
-        err.status = 400;
+        const dupErr = new Error('The username already exists');
+        dupErr.status = 400;
+        next(dupErr);
       }
       next(err);
     });

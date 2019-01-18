@@ -97,28 +97,30 @@ const validateTags = (req, res, next) => {
   const userId = req.user.id;
   const { tags } = req.body;
 
-  if (!Array.isArray(tags)) {
-    const err = new Error('The `tags` property must be an array');
-    err.status = 400;
-    return next(err);
-  }
-
-  tags.forEach(tag => {
-    if (!mongoose.Types.ObjectId.isValid(tag)) {
-      const err = new Error('The `tags` array contains an invalid id');
+  if (tags) {
+    if (!Array.isArray(tags)) {
+      const err = new Error('The `tags` property must be an array');
       err.status = 400;
       return next(err);
     }
-
-    Tag.find({ userId, _id: tag })
-      .then(tag => {
-        if (!tag.userId.equals(userId)) {
-          const err = new Error('The `tag` id is not valid');
-          err.status = 400;
-          return next(err);
-        }
-      });
-  });
+  
+    tags.forEach(tag => {
+      if (!mongoose.Types.ObjectId.isValid(tag)) {
+        const err = new Error('The `tags` array contains an invalid id');
+        err.status = 400;
+        return next(err);
+      }
+  
+      Tag.find({ userId, _id: tag })
+        .then(tag => {
+          if (!tag.userId.equals(userId)) {
+            const err = new Error('The `tag` id is not valid');
+            err.status = 400;
+            return next(err);
+          }
+        });
+    });
+  }
   next();
 };
 
