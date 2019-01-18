@@ -1,3 +1,10 @@
 language: node_js
 node_js: node
 services: mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: E6jcA1BojC7AMflCmqdNAcncqOElORISaeYZb6YQbJUYxUS+VR/wn8qtL3zlQHtnoEpfsbF1+B91V46MB6OyY8rqkhA4+GzhemUXtuCfp8q2OFlXMQRMuH7Z280FNL5kn9rp7zOEuGfWuDS0Nf5Az6Cuk3gPFvbwKvWG0ewaTxqd5mzrabRSXv5mqBjzvedoIr4dEFVAPtmsePLK+2evrivYN5LSVAGYV9lYtgAdQa1iZoo+5Fl8nsJ2TkZmQ6abTSXDXTmLdvL9CBE1UN1eMToQorbrpSI8yrmqNJfrFmcLALcXPiAh+BlBWb2EODlQFw5tc9WMq/5DNzfkJDYVy4AI8xwyLjf5kN6b+GljPd493jtJpAp/oibZ20+/TwXUY78vtJwW/MQhd6+U7mEaayv8vs35UKHvNwtNlJX8hcbgWcAxUqHPiOk+Mqd/fvCyvSoRHgxiSLnVvqK7T5Q2xiQKOGg35vdY49ZqnV8QPlLsrvkvTKjOY5zsKgVok8bk1TYYyD8bSLKlliL/6Cmzic1/v3MAlqn5A9IcJ8gWt5cHFFgZsr8DPRPlhvxdQvSJ/jF4F7eq+DJkKycxGCIVGUzoRnKNQKcLcV2jGKVl91LYkrljjNnl39wOsRUipG931owNMGGQFau7jeT8rt82WUfk7o00OL9xet/pnFnryRw=
+  app: peter-noteful-v4
+  on:
+    repo: thinkful-ei27/peter-noteful-v4
